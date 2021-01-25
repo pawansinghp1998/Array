@@ -1,17 +1,35 @@
 //You are climbing a staircase. It takes n steps to reach the top.
 //Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
-class Solution {
-    public int climbStairs(int n) {
-        int c=0,total=0,sum=0;
-        for(int i=0;i<=n;i=i+1)
+package geekswork;
+
+ class solution  {
+	public int fact(int n) 
+	{int factorial=1;
+		for (int i=1;i<=n;i++)
+		{
+			factorial=factorial*i;
+		}
+		return factorial;
+	}
+	}
+class geekwork10 {
+    public static void main(String args[]) {
+        int c=0,total=0; int n=5;
+       solution ob=new solution();
+        for(int i=0;i<=n;i++)
         {
             for(int j=0;j<=n;j++)
             {
                 total=(1*i)+(2*j);
-                if (total==n && ((i==0)||(j==0)))
-                   c=c+1;   
+                if (total==n)
+                {
+                    
+                    c=c+((ob.fact(i+j))/(ob.fact(i)*ob.fact(j)));
+                    continue;
+                }
+                     
             }
         }
-        return c;
+        System.out.println(c);
     }
 }
