@@ -1,9 +1,9 @@
-//You are climbing a staircase. It takes n steps to reach the top.
+Q.1 //You are climbing a staircase. It takes n steps to reach the top.
 //Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 package geekswork;
 
  class solution  {
-	public int fact(int n) 
+	public int fact(int n)                             //this function will return factorial of a number to the calling function
 	{int factorial=1;
 		for (int i=1;i<=n;i++)
 		{
@@ -20,11 +20,11 @@ class geekwork10 {
         {
             for(int j=0;j<=n;j++)
             {
-                total=(1*i)+(2*j);
+                total=(1*i)+(2*j);                //Condition to check the no of ways we can climb to given no of step using step size of 1&2 without permutation
                 if (total==n)
                 {
                     
-                    c=c+((ob.fact(i+j))/(ob.fact(i)*ob.fact(j)));
+                    c=c+((ob.fact(i+j))/(ob.fact(i)*ob.fact(j)));             //this is used to calculate total ways to clim up with permulation
                     continue;
                 }
                      
@@ -33,3 +33,40 @@ class geekwork10 {
         System.out.println(c);
     }
 }
+
+
+Q.2//Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+
+//The number of elements initialized in nums1 and nums2 are m and n respectively. 
+//You may assume that nums1 has a size equal to m + n such that it has enough space to hold additional elements from nums2.
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int temp=0;
+        for(int i=0;i<m+n;i++)                    //this loop is used for merging both the array
+        {
+            if(i>=m)
+            {
+                nums1[i]=nums2[i-m];
+            }
+            else
+                nums1[i]=nums1[i];
+        }
+        for(int j=0;j<m+n;j++)                   //these two loops are used for sorting
+        {
+            for(int k=0;k<m+n-1;k++)
+            {
+                if(nums1[k]>nums1[k+1])           //Swapping the two number
+                {
+                    temp=nums1[k];
+                nums1[k]=nums1[k+1];
+                nums1[k+1]=temp;
+                }
+            }
+        }
+        
+    }
+}
+
+
+
