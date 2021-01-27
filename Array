@@ -69,4 +69,44 @@ class Solution {
 }
 
 
+Q.3    Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, 
+which minimizes thesum of all numbers along its path.Note: You can only move either down or 
+right at any point in time.
+
+class Solution {
+    public int minPathSum(int[][] grid) {                          //We have followed bottom to up approach of dyanimic programming
+        
+        int rows = grid.length;                                        //Calculate size of grid
+        int cols = grid[0].length;
+        int dp[][] = new int[rows][cols];
+        
+        for(int i = rows-1;i>=0;i--)        
+        {
+            for(int j = cols-1;j>=0;j--)
+            {
+                if(i==rows-1 && j == cols-1)                            //element is last element of grid
+                {
+                    dp[i][j] = grid[i][j];
+                }
+				else if(i==rows-1)                         // element belongs to last row
+                {
+                    dp[i][j] = dp[i][j+1] + grid[i][j];
+                } 
+				else if(j == cols-1)                         //elements belongs to last columns
+                {
+                    dp[i][j] = dp[i+1][j] + grid[i][j];
+                } 
+                else                                                                    //it will choose the min value
+                {
+                    dp[i][j] =  grid[i][j]  + Math.min(dp[i][j+1], dp[i+1][j]);
+                }
+            }
+        }
+        
+        return dp[0][0];                                                     //It will contain minsum of path that can be followed
+        
+    }
+}
+
+
 
