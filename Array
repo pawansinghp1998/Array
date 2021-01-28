@@ -110,3 +110,59 @@ class Solution {
 
 
 
+Q.4  Given an m x n board and a word, find if the word exists in the grid.The word can be constructed from letters of sequentially 
+adjacent cells, where "adjacent" cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+class Solution {
+    public boolean exist(char[][] board, String word) // Main method
+{
+        for(int i = 0; i < board.length; i++)  // Iterate through the matrix, while doing so, call the support method so it will do the calculations.
+        {
+            for(int j = 0; j < board[0].length; j++) 
+            {                
+                if(helper(board, i, j, word, 0))// Here the main method gets the results form the support method.
+                {
+                   return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    private boolean helper(char[][] board, int x, int y, String word, int end) // Support method.
+    {     
+        if(x < 0 || board.length-1 < x || y < 0 || board[0].length-1 < y || board[x][y] == 'x' || word.charAt(end) != board[x][y]) 
+	// Check if we are in the boundaries, or the spot has been visited or that the current letter do not match to the letter in the matrix.
+	    {
+            return false;
+        }
+        
+        if(end == word.length()-1) // If we have reached the end of the given word, we found it in the matrix.
+        {
+            return true;
+        }
+          
+        char temp = board[x][y]; // Make a copy of the current spot that we are in.
+			board[x][y] = 'x'; 
+			
+			// Overwrite the current spot so that we will know that we have been here before (for the rest of the current iteration).
+           
+        boolean up = helper(board, x-1, y, word, end+1);       // Options of traversing the matrix.
+        boolean down = helper(board, x+1, y, word, end+1);
+        boolean left = helper(board, x, y-1, word, end+1);
+        boolean right = helper(board, x, y+1, word, end+1);
+        
+        if(up || down || left || right) // If the options are valid, return true.
+        {
+            return true;
+        }
+        else
+        {
+             board[x][y] = temp; // Else overwrite the current spot with the copy of the original value for the next iteration.
+             return false;
+		}
+			 
+         
+ }
+}
+
