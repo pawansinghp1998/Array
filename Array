@@ -183,3 +183,29 @@ Q.5  Given an array of non-negative integers nums, you are initially positioned 
         return true;
     }
 }
+
+
+Q.6.Given an array of non-negative integers nums, you are initially positioned at the first index of the array. Each element in the 
+    array represents your maximum jump length at that position.Your goal is to reach the last index in the minimum number of jumps.
+    You can assume that you can always reach the last index.
+    
+    
+    class Solution {
+    public int jump(int[] nums) {
+        if(nums.length == 1) return 0;                   //if array contain only one element min no step require to reach last index is zero
+        
+        int n = nums.length-1;
+        int count = 0;
+        int maxpos = 0;
+        int pos = 0;
+        
+        for(int i = 0;i<n;i++){
+            maxpos = Math.max(maxpos,nums[i]+i);      //finding till which max index it can reach in next count
+            if(pos == i){
+                pos = maxpos;                          //Storing that index till which it can reach
+                count++;                                 //min no step required to reach last index of array
+            }
+        }
+     return count;   
+    }
+}
